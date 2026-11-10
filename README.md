@@ -8,11 +8,11 @@ You give it a niche, and it finds posts that got 100x more views than their acco
 - Can a new account copy the winners as a slideshow, a 3-second hook + app demo or silent UGC? Or do they need a face or a known brand?
 - Which formats should you test, and on how many accounts?
 
-I used it to plan TikTok accounts for my own apps in AI chat, calorie tracking, AI app building and Bible reading.
+I used it to plan TikTok accounts for apps in AI chat, calorie tracking, AI app building and Bible reading.
 
 ## Example output
 
-The verdict at the top of `example/bible_viral_formats.csv`:
+The verdict at the top of [`skills/viral-format-research/example/bible_viral_formats.csv`](skills/viral-format-research/example/bible_viral_formats.csv):
 
 ```
 Runs on,both. 6 of 49 slideshow hits from last 90 days; 7 of 30 video hits.
@@ -32,8 +32,22 @@ Below the verdict, each format gets one row that says what it looks like, follow
 
 ## Install
 
+In Claude Code:
+
+```
+/plugin marketplace add arrrtem22/viral-format-research
+/plugin install viral-format-research@viral-format-research
+```
+
+Or with the [skills CLI](https://skills.sh), which also works for other agents:
+
 ```bash
-git clone https://github.com/arrrtem22/viral-format-research ~/.claude/skills/viral-format-research
+npx skills add arrrtem22/viral-format-research
+```
+
+Then install Pillow for the cover grids:
+
+```bash
 pip install Pillow
 ```
 
@@ -44,8 +58,10 @@ You need an [Apify](https://apify.com) API token. Set `APIFY_TOKEN`, or put one 
 In Claude Code:
 
 ```
-/viral-format-research meditation app for anxious students
+/viral-format-research:viral-format-research meditation app for anxious students
 ```
+
+With the skills CLI the command is `/viral-format-research`.
 
 Claude can also start the skill on its own when you ask something like "does the Bible app niche work on TikTok?"
 
@@ -53,7 +69,10 @@ Claude asks before it spends money on Apify. It does not post, copy content or c
 
 ## Run the scripts by hand
 
+From a clone of this repo:
+
 ```bash
+cd skills/viral-format-research
 scripts/scrape.sh out/meditation 30 2 "anxiety relief" "how to calm down" "study stress" "headspace"
 python3 scripts/analyze.py out/meditation/main.json out/meditation
 ```

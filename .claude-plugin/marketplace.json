@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "viral-format-research",
+  "description": "Find TikTok formats a new account can copy to market an app.",
+  "owner": { "name": "Artemii Oliinyk", "url": "https://github.com/arrrtem22" },
+  "plugins": [
+    {
+      "name": "viral-format-research",
+      "description": "Scrape TikTok search with Apify, keep 100x views-per-follower posts, write a CSV of copyable slideshow and video formats.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

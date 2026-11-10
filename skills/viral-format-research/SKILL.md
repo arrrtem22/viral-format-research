@@ -10,7 +10,7 @@ The research covers the whole niche, both slideshows and videos. It answers 3 qu
 2. Can a new account copy the winners as a slideshow, a 3-second hook + app demo, or silent UGC (hands, screen recording, no face)? Or do they need a face, a voice or a trusted brand?
 3. Which formats should go on which accounts?
 
-`example/bible_viral_formats.csv` shows the output.
+`example/bible_viral_formats.csv` shows the output. Paths to `scripts/` and `example/` below are relative to the folder this SKILL.md is in.
 
 ## Steps
 
