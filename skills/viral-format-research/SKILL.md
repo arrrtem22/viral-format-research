@@ -40,17 +40,19 @@ Copy,<what can be copied and how>. <what cannot: face / brand>.
 Test,<formats to run, accounts per format>. <what to skip>.
 
 SLIDESHOWS
-Format,How it looks,Hook (on-screen),Link,Followers,Views,Views/follower,Posted,Search word
-S1 <name>,<cover + slide pattern + where the app goes; max 15 words>,,,,,,,
-,,<hook text>,<link>,<followers>,<views>,<ratio>x,<YYYY-MM-DD>,<term>
+Format,How it looks,What changes per post,Where the CTA goes,Hook (on-screen),Link,Followers,Views,Views/follower,Posted,Search word
+S1 <name>,<cover + slide pattern; max 15 words>,<what a new post swaps; max 10 words>,<slide number or caption, and how the app shows>,,,,,,,
+,,,,<hook text>,<link>,<followers>,<views>,<ratio>x,<YYYY-MM-DD>,<term>
 
 VIDEOS
-Format,How it looks,Hook (on-screen),Link,Followers,Views,Views/follower,Posted,Search word
-V1 <name> (<silent | hook+demo | face | brand>),<shot pattern + where the app goes; max 15 words>,,,,,,,
-,,<hook text>,<link>,<followers>,<views>,<ratio>x,<YYYY-MM-DD>,<term>
+Format,How it looks,What changes per post,Where the CTA goes,Hook (on-screen),Link,Followers,Views,Views/follower,Posted,Search word
+V1 <name> (<silent | hook+demo | face | brand>),<shot pattern; max 15 words>,<what a new post swaps; max 10 words>,<second mark or caption, and how the app shows>,,,,,,,
+,,,,<hook text>,<link>,<followers>,<views>,<ratio>x,<YYYY-MM-DD>,<term>
 ```
 
 - Number formats S1, S2 … and V1, V2 …, best first: copyable, recent and a fit for the app.
+- `What changes per post` is the part a new post swaps while the rest of the template stays the same (ranking: the app list; verse slideshow: the verses and the cover photo). Fill it only on the format row.
+- `Where the CTA goes` is where the app shows and how: slide number (`slide 2, app screenshot`), second mark (`0:03, screen recording`), caption or pinned comment. Write `none` when the winners show no app. Fill it only on the format row.
 - Give each format 3 to 8 example rows, best ratio first. The first row is the post to copy.
 - The hook is the text on screen or the first line of the caption, without hashtags.
 - Leave out formats seen on fewer than 3 accounts. Leave out posts in other languages unless the app targets them.
