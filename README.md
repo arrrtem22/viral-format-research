@@ -24,9 +24,9 @@ Below the verdict, each format gets one row that says what it looks like, follow
 
 ## How it works
 
-1. Claude picks 10 to 16 search terms aimed at the buyer. For a calorie tracker that means "weight loss" and "what i eat in a day", not "calorie app".
-2. `scripts/scrape.sh` runs the Apify actor [clockworks/tiktok-scraper](https://apify.com/clockworks/tiktok-scraper) on those terms. 450 posts cost about $2.
-3. `scripts/analyze.py` keeps posts with 100x views per follower or more from accounts with 100k followers or fewer. It prints how many hits are from the last 90 days and draws cover grids of the hits.
+1. Claude picks 14 to 16 search terms aimed at the buyer, most of them broad. For a calorie tracker that means "weight loss" and "what i eat in a day", not "calorie app".
+2. `scripts/scrape.sh` runs the Apify actor [clockworks/tiktok-scraper](https://apify.com/clockworks/tiktok-scraper) on those terms. A run of about 800 posts costs $3 to $5.
+3. `scripts/analyze.py` keeps posts with 100x views per follower or more and at least 10,000 views, from accounts with 100k followers or fewer. It prints how many hits are from the last 90 days and draws cover grids of the hits. It prints `THIN` when it finds fewer than 50 hits, and Claude then scrapes more broad terms.
 4. Claude reads the cover grids, groups the hits into formats and tags each video format `silent`, `hook+demo`, `face` or `brand`.
 5. Claude writes `<name>_viral_formats.csv` and gives you the verdict in a few lines.
 
@@ -73,7 +73,7 @@ From a clone of this repo:
 
 ```bash
 cd skills/viral-format-research
-scripts/scrape.sh out/meditation 30 2 "anxiety relief" "how to calm down" "study stress" "headspace"
+scripts/scrape.sh out/meditation 55 5 "anxiety relief" "how to calm down" "study stress" "headspace"
 python3 scripts/analyze.py out/meditation/main.json out/meditation
 ```
 
