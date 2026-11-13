@@ -24,11 +24,14 @@ Below the verdict, each format gets one row that says what it looks like, follow
 
 ## How it works
 
-1. Claude picks 14 to 16 search terms aimed at the buyer, most of them broad. For a calorie tracker that means "weight loss" and "what i eat in a day", not "calorie app".
+1. Claude asks whether to research slideshows, videos or both, then picks 14 to 16 search terms aimed at the buyer, most of them broad. For a calorie tracker that means "weight loss" and "what i eat in a day", not "calorie app".
 2. `scripts/scrape.sh` runs the Apify actor [clockworks/tiktok-scraper](https://apify.com/clockworks/tiktok-scraper) on those terms. A run of about 800 posts costs $3 to $5.
 3. `scripts/analyze.py` keeps posts with 100x views per follower or more and at least 10,000 views, from accounts with 100k followers or fewer. It prints how many hits are from the last 90 days and draws cover grids of the hits. It prints `THIN` when it finds fewer than 50 hits, and Claude then scrapes more broad terms.
 4. Claude reads the cover grids, groups the hits into formats and tags each video format `silent`, `hook+demo`, `face` or `brand`.
-5. Claude writes `<name>_viral_formats.csv` and gives you the verdict in a few lines.
+5. Claude writes `<name>_viral_formats.csv` with a soft CTA for each format that a new account can repeat with endless variations.
+6. `scripts/pick.py` marks the top 5 slideshow and top 5 video posts from those formats. Posts in the top 20% of views come first, best views per follower first, so a tiny account with a big ratio and little reach does not win. It saves an xlsx with those rows in green.
+7. `scripts/upload_sheet.py` uploads the xlsx to Google Drive as a Google Sheet when gcloud is logged in with the Drive scope. Otherwise Claude asks whether to keep the local file or connect Google.
+8. Claude gives you the verdict, the top picks and the sheet link in a few lines.
 
 ## Install
 
@@ -45,13 +48,22 @@ Or with the [skills CLI](https://skills.sh), which also works for other agents:
 npx skills add arrrtem22/viral-format-research
 ```
 
-Then install Pillow for the cover grids:
+Then install Pillow for the cover grids and openpyxl for the xlsx:
 
 ```bash
-pip install Pillow
+pip install Pillow openpyxl
 ```
 
 You need an [Apify](https://apify.com) API token. Set `APIFY_TOKEN`, or put one or more tokens in `~/.apify_tokens.txt`. The script uses the first token that still has enough monthly credit for the run. Set `APIFY_TOKENS_FILE` to use another file.
+
+Google Sheets upload is optional. Log in once with the Drive scope, and turn on the Drive API in the quota project if the upload asks for it:
+
+```bash
+gcloud auth application-default login --scopes=https://www.googleapis.com/auth/drive.file,https://www.googleapis.com/auth/cloud-platform
+gcloud services enable drive.googleapis.com --project <quota project>
+```
+
+Sheets go to the Drive folder `Viral format research` (set `SHEETS_FOLDER` to change it). Set `GOOGLE_QUOTA_PROJECT` to use a project other than the one gcloud saved.
 
 ## Use
 
